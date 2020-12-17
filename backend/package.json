@@ -1,0 +1,26 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ronan40/groupo.git"
+  },
+  "author": "Ronan Pradot",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ronan40/groupo/issues"
+  },
+  "homepage": "https://github.com/Ronan40/groupo#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5",
+    "nodemon": "^2.0.6",
+    "sequelize": "^6.3.5"
+  }
+}
