@@ -3,7 +3,7 @@ const db = {};
 
 var database = require("../models");
 
-const sequelize = new Sequelize("groupomania", "root", "", {
+const sequelize = new Sequelize("groupo", "root", "", {
   host: "localhost",
   dialect: "mysql",
   pool: {
