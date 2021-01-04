@@ -1,50 +1,50 @@
-const Post = require("../models/post");
+const Comment = require("../models/comment");
 const fs = require("fs");
 
-// Créer une post :
+// Créer un comment :
 
-exports.createPost = (req, res, next) => {
-  const postObject = JSON.parse(req.body.post);
-  delete postObject._id;
-  const post = new Post({
-    ...postObject,
+exports.createComment = (req, res, next) => {
+  const commentObject = JSON.parse(req.body.comment);
+  delete commentObject._id;
+  const comment = new Comment({
+    ...commentObject,
     imageUrl: `${req.protocol}://${req.get("host")}/images/${
       req.file.filename
     }`,
   });
-  post
+  comment
     .save()
     .then(() => res.status(201).json({ message: "Objet enregistré !" }))
     .catch((error) => res.status(400).json({ error }));
 };
 
-// Modifier un post :
+// Modifier un comment :
 
-exports.modifyPost = (req, res, next) => {
-  const postObject = req.file
+exports.modifyComment = (req, res, next) => {
+  const commentObject = req.file
     ? {
-        ...JSON.parse(req.body.post),
+        ...JSON.parse(req.body.comment),
         imageUrl: `${req.protocol}://${req.get("host")}/images/${
           req.file.filename
         }`,
       }
     : { ...req.body };
-  Post.updateOne(
+  Comment.updateOne(
     { _id: req.params.id, userId: req.body.userId },
-    { ...postObject, _id: req.params.id }
+    { ...commentObject, _id: req.params.id }
   )
     .then(() => res.status(200).json({ message: "Objet modifié !" }))
     .catch((error) => res.status(400).json({ error }));
 };
 
-// Supprimer un post :
+// Supprimer un comment :
 
-exports.deletePost = (req, res, next) => {
-  Post.findOne({ _id: req.params.id })
-    .then((post) => {
-      const filename = post.imageUrl.split("/images/")[1];
+exports.deleteComment = (req, res, next) => {
+  Comment.findOne({ _id: req.params.id })
+    .then((comment) => {
+      const filename = comment.imageUrl.split("/images/")[1];
       fs.unlink(`images/${filename}`, () => {
-        Post.deleteOne({ _id: req.params.id })
+        Comment.deleteOne({ _id: req.params.id })
           .then(() => res.status(200).json({ message: "Objet supprimé !" }))
           .catch((error) => res.status(400).json({ error }));
       });
@@ -52,14 +52,14 @@ exports.deletePost = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
-exports.getOnePost = (req, res, next) => {
-  Post.findOne({ _id: req.params.id })
-    .then((post) => res.status(200).json(post))
+exports.getOneComment = (req, res, next) => {
+  Comment.findOne({ _id: req.params.id })
+    .then((comment) => res.status(200).json(comment))
     .catch((error) => res.status(404).json({ error }));
 };
 
-exports.getAllPost = (req, res, next) => {
-  Post.find()
-    .then((posts) => res.status(200).json(posts))
+exports.getAllComment = (req, res, next) => {
+  Comment.find()
+    .then((comments) => res.status(200).json(comments))
     .catch((error) => res.status(400).json({ error }));
 };

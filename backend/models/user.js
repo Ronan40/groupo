@@ -1,15 +1,7 @@
-const { Sequelize } = require("sequelize");
-
 ("use strict");
 
 module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define("User", {
-    id: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      primaryKey: true,
-      defaultValue: Sequelize.UUIDV4,
-    },
     firstName: {
       type: DataTypes.STRING,
       validate: {
@@ -35,9 +27,5 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   });
-  User.associate = (models) => {
-    // hasMany association: foreign key (userId) stored on target model (Text)
-    User.hasMany(models.Comment, { foreignKey: "userId", sourceKey: "id" });
-  };
   return User;
 };
