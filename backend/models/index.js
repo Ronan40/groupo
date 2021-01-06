@@ -6,9 +6,10 @@ const db = {};
 const sequelize = new Sequelize(
   "groupomania_development",
   "root",
-  null,
+  "root",
   {
     host: "localhost",
+    port: 8889,
     dialect: "mysql",
     pool: {
       max: 5,
