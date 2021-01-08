@@ -13,10 +13,6 @@ module.exports = (sequelize, DataTypes) => {
         len: [3, 400],
       },
     },
-    userId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-    },
   });
   return Post;
 };

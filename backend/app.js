@@ -10,8 +10,6 @@ db.sequelize.sync({
   force: true,
 });
 
-// db.sequelize.sync(); 
-
 //CORS - Blocks HTTP calls between different servers
 
 app.use((req, res, next) => {

@@ -8,14 +8,6 @@ module.exports = (sequelize, DataTypes) => {
         len: [3, 200],
       },
     },
-    userId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-    },
-    postId: {
-      type: DataTypes.UUID,
-      allowNull: true,
-    },
   });
 
   return Comment;
