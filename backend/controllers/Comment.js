@@ -14,7 +14,7 @@ exports.createComment = (req, res, next) => {
   });
   comment
     .save()
-    .then(() => res.status(201).json({ message: "Objet enregistré !" }))
+    .then(() => res.status(201).json({ message: "Message enregistré !" }))
     .catch((error) => res.status(400).json({ error }));
 };
 
@@ -33,7 +33,7 @@ exports.modifyComment = (req, res, next) => {
     { _id: req.params.id, userId: req.body.userId },
     { ...commentObject, _id: req.params.id }
   )
-    .then(() => res.status(200).json({ message: "Objet modifié !" }))
+    .then(() => res.status(200).json({ message: "Message modifié !" }))
     .catch((error) => res.status(400).json({ error }));
 };
 
@@ -45,17 +45,11 @@ exports.deleteComment = (req, res, next) => {
       const filename = comment.imageUrl.split("/images/")[1];
       fs.unlink(`images/${filename}`, () => {
         Comment.deleteOne({ _id: req.params.id })
-          .then(() => res.status(200).json({ message: "Objet supprimé !" }))
+          .then(() => res.status(200).json({ message: "Message supprimé !" }))
           .catch((error) => res.status(400).json({ error }));
       });
     })
     .catch((error) => res.status(500).json({ error }));
-};
-
-exports.getOneComment = (req, res, next) => {
-  Comment.findOne({ _id: req.params.id })
-    .then((comment) => res.status(200).json(comment))
-    .catch((error) => res.status(404).json({ error }));
 };
 
 exports.getAllComment = (req, res, next) => {
