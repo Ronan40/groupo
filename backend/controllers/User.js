@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
+const { signUpErrors, signInErrors } = require("../utils/errors");
 
 // Créer un compte utilisateur :
 
@@ -10,8 +11,7 @@ exports.signup = (req, res, next) => {
   if (!/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.{6,})/.test(req.body.password)) {
     // Test password strength
     return res.status(401).json({
-      error:
-        "Le mot de passe doit contenir une lettre majuscule, une minuscule et au moins 1 chiffre (6 caractères min)",
+      error: { signUpErrors },
     });
   } else {
     // Password is acceptable, hash it
@@ -37,7 +37,7 @@ exports.login = (req, res, next) => {
   User.findOne({ email: req.body.email })
     .then((user) => {
       if (!user) {
-        return res.status(401).json({ error: "Utilisateur non trouvé !" });
+        return res.status(401).json({ signInErrors  });
       }
       bcrypt
         .compare(req.body.password, user.password)

@@ -1,11 +1,11 @@
 
-import React from 'react'
+import './App.css';
+import Routes from './components/routes'
 
-export default function App() {
+function App() {
   return (
-    <div>
-      Hello depuis App
-    </div>
-  )
+    <Routes />
+  );
 }
 
+export default App;

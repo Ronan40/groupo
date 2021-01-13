@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Trending() {
+export default function SignUpForm() {
     return (
         <div>
-            Hello depuis Trending
+            
         </div>
     )
 }
